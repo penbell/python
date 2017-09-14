@@ -1,15 +1,17 @@
-import calc
+import Calc 
 import am
 
 class Calculator() :
 	def __init__(self):
-		self.a = calc.Calc()
+		self.a = Calc.Calc()
 		self.b = am.AM()
 		self.run()
 
 	def run(self) :
-		self.a.test()
-		self.b.test()
+		self.a.multful()
+		self.a.division()
+		self.b.adder()
+		self.b.minus()
 
 if __name__ == '__main__' :
 	p = Calculator()
