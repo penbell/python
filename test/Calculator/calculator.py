@@ -8,10 +8,10 @@ class Calculator() :
 		self.run()
 
 	def run(self) :
-		self.a.multful()
-		self.a.division()
-		self.b.adder()
-		self.b.minus()
+		print(self.a._multiful(4,2))
+		print(self.a._division(4,2))
+		print(self.b.adder(4,2))
+		print(self.b.minus(4,2))
 
 if __name__ == '__main__' :
 	p = Calculator()
