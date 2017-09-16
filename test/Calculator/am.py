@@ -1,6 +1,6 @@
-class AM:
+class PLUS_MINUS:
 
-	def adder(self, arg1, arg2):
+	def plus(self, arg1, arg2):
 		return arg1 + arg2
 
 	def minus(self, arg1, arg2):
