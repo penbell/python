@@ -1,3 +1,11 @@
+'''
+@author : 이병욱 suhyun
+@data : 2017-09-16
+@version : 1.0.0
+
+@brief : check multiful and division
+- python version : 3.5.x
+'''
 class Mul_Div() :
 
     def _multiful(self, num1, num2) :
