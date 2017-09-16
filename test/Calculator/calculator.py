@@ -29,7 +29,7 @@ class Calculator() :
         else :
             print('연산 기호가 이상합니다.')
 
-    def isNumber(s):
+    def isNumber(self, s):
         try:
             int(s)
             return True
