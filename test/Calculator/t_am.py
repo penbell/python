@@ -11,6 +11,6 @@
 
 import am
 
-cal = am.PLUS_MINUS(2,3)
-print(cal.plus())
-print(cal.minus())
+cal = am.PLUS_MINUS()
+print(cal.plus(2, 3))
+print(cal.minus(2, 3))
