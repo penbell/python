@@ -12,11 +12,12 @@ from konlpy.utils import pprint
 
 class SentenceManager() :
     
-    def run(self, pos, slist) :                                #문장 처리 수행
+    def run(self, pos) :                                #문장 처리 수행
         path = "C:/Program Files/Java/jdk1.7.0_55/jre/bin/server/jvm.dll"
+        slist = []
         try :
             self.scd_parser('DOC1.SCD', slist)    # scd에서 문장 추출, #id, date는 별도 저장
-            self.pos_tagger(slist[0:2], pos, path)    # 문장 형태소 분석하여 명사 추출
+            self.pos_tagger(slist[0:10000], pos, path)    # 문장 형태소 분석하여 명사 추출
             
             return 1
         except :

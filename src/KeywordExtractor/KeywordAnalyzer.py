@@ -8,7 +8,7 @@
 - check tf idf tfidf
 '''
 
-from operator
+import operator
 from collections import Counter #
 
 class KeywordAnalyzer() :
@@ -22,11 +22,11 @@ class KeywordAnalyzer() :
             self.tfidf_calc(keyword)
             self.reset()
 
-            return 0
+            return 1
 
         except :
 
-            return 1
+            return 0
 
     def tf_calc(self, list1) :
         # tf를 계산하는 함수.
@@ -71,7 +71,7 @@ class KeywordAnalyzer() :
             for j in self._tf[i].keys() :
                 each[j] = self._tf[i][j] / self._df[j] 
 
-            keyword += [ sorted(each.items(), key=operator.itemgetter(1), reverce=True) ]
+            keyword += [ sorted(each.items(), key=operator.itemgetter(1), reverse=True) ]
 
     def reset(self) :
         self._tf = []
