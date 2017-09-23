@@ -18,7 +18,7 @@ path = "C:/Program Files/Java/jdk1.7.0_55/jre/bin/server/jvm.dll"
 start = time.time()
 # print(p.run(pos, slist))
 try:
-   print(p.scd_parser('DOC.SCD', slist))
+   print(p.scd_parser('DOC1.SCD', slist))
 except Exception as ex:
    print(ex)
 
