@@ -79,6 +79,6 @@ class SentenceManager() :
                         continue
                     
                     index[key] = [i]
-               return 1, "ok"
+            return 1, "ok"
         except Exception as ex :
             return 0, ex
