@@ -20,10 +20,10 @@ class SentenceManager() :
         slist = []
         try :
             self.scd_parser('DOC1.SCD', slist)    # scd에서 문장 추출, #id, date는 별도 저장
-            self.pos_tagger(slist[0:10], pos, path)    # 문장 형태소 분석하여 명사 추출
+            self.pos_tagger(slist[0:100], pos, path)    # 문장 형태소 분석하여 명사 추출
             
             return 1, "ok"
-        except :
+        except Exception as ex :
             return 0, ex
             
     def scd_parser(self, scd, slist) :

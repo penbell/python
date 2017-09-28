@@ -27,10 +27,17 @@ class Keyword_Ext :
         self.index = {}
 
     def run(self):
-        self.check(self.sm.run(self.pos), 'sm.run')
-        self.check(self.ka.run(self.pos,self.keyword), 'ka.run')
-        self.check(self.sm.id_manager(self.keyword, self.key_id, self.key_iid), 'id_manager')
-        self.check(self.sm.id_indexer(self.keyword, self.index), 'indexer')
+        ret, ex = self.sm.run(self.pos)
+        self.check(ret, ex, 'sm.run')
+
+        ret, ex = self.ka.run(self.pos,self.keyword)
+        self.check(ret, ex, 'ka.run')
+
+        ret, ex = self.sm.id_manager(self.keyword, self.key_id, self.key_iid)
+        self.check(ret, ex, 'id_manager')
+
+        ret, ex = self.sm.indexer(self.keyword, self.index)
+        self.check(ret, ex, 'indexer')
 
     def check(self, ret, ex, i) :
         if ret is 1 :
