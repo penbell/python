@@ -1,15 +1,20 @@
 '''
 @author : suhyun 이병욱
-@data : 2017-09-23
-@version : 1.0.3
+@data : 2017-09-28
+@version : 1.0.4
 
-@brief : check tf idf 
+@brief : check tf, idf, tfidf, normalizer
 - python version : 3.5.x
-- check tf idf tfidf
+- check tf, idf, tfidf, normalizer
+- variables
+   - _tf : tf 계산된 값을 list안에 문서별로 counter된 값은 입력
+   - _df : 중복된 단어를 제거하고 _df변수에 df값을 채워넣는다
+   - each : tfidf가 계산된 dictionary
 '''
-
+import time
 import operator
 from collections import Counter #
+import copy
 
 class KeywordAnalyzer() :
     _tf = [] 
@@ -19,8 +24,9 @@ class KeywordAnalyzer() :
         try :
             self.tf_calc(list1)
             self.idf_calc()
-            self.tfidf_calc(keyword)
+            self.tfidf_calc()
             self.reset()
+            self.normalizer(self.each,keyword)
 
             return 1
 
@@ -57,7 +63,7 @@ class KeywordAnalyzer() :
                     else :
                         self._df[key] = 1
 
-    def tfidf_calc(self, keyword) :
+    def tfidf_calc(self) :
         '''
         tfidf를 계산하는 함수.
         임시로 딕셔너리 받을 위치 생성(한 문서를 돌때마다 새로 생성.) 하고
@@ -66,12 +72,22 @@ class KeywordAnalyzer() :
 
         for i in range(len(self._tf)) :
 
-            each = {}
+            self.each = {}
 
             for j in self._tf[i].keys() :
-                each[j] = self._tf[i][j] / self._df[j] 
+                self.each[j] = self._tf[i][j] / self._df[j]
+        return self.each
 
-            keyword += [ sorted(each.items(), key=operator.itemgetter(1), reverse=True) ]
 
     def reset(self) :
         self._tf = []
+
+# func normalizer # tf-idf 점수 평준화(0~100점)
+    def normalizer(self,dict,keyword):
+        max_value = max(dict.values())
+
+        for key in dict.keys():
+            dict[key] = int((dict[key] / max_value) * 100)
+
+        keyword += [sorted(dict.items(), key=operator.itemgetter(1), reverse=True)]
+
