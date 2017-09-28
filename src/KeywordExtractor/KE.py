@@ -22,27 +22,25 @@ class Keyword_Ext :
         self.pos = []
         self.keyword = []
         self.r_keyword = []
-        # self.id = {}
-        # self.iid = {}
-        # self.index = {}
+        self.key_id = {}
+        self.key_iid = {}
+        self.index = {}
 
 
     def run(self):
-        ret = self.sm.run(self.pos)
-        if ret is 1:
-            print("SM complete")
-        else :
-            print("SM error")
-        ret = self.ka.run(self.pos,self.keyword)
-        if ret is 1 :
-            print("KA complete")
-        else :
-            print("KA error")
+        self.check(self.sm.run(self.pos), 'sm.run')
+        self.check(self.ka.run(self.pos,self.keyword), 'ka.run')
+        #self.check(self.sm.id_manager(self.keyword, self.key_id, self.key_iid), 'id_manager')
+        #self.check(self.sm.id_indexer(self.keyword, self.index), 'indexer')
 
-    # def temp(self):
-    #     sm.id_manager(keyword,id,iid)
-    #     sm.indexer(keyword,index)
-    #     ka.relational_keyword_analyzer(keyword,r_keyword)
+
+    def check(self, ret, i) :
+        if ret is 1 :
+            print("{}함수 성공!".format(i))
+
+        else :
+            print("{}함수 실패!".format(i))
+
 
     def print_pos(self):
         print(self.pos)
@@ -53,26 +51,28 @@ class Keyword_Ext :
     def write_pos(self):
         f = open("pos_result.txt", "w")
         for sentence in self.pos:
-            f.write(str(sentence))
+            f.write("{}\n".format(str(sentence)))
 
     def write_keyword(self):
         f = open("keyword_result.txt","w")
         for sentence in self.keyword:
-            f.write(str(sentence))
+            f.write("{}\n".format(str(sentence)))
 
 if __name__ == "__main__" :
     start = time.time()
+   
     ke = Keyword_Ext()
     ke.run()
+    
     end = time.time() - start
     print("complete: [" + str(round(end, 2)) + "second ]")
 
-    # pos keyword 출력
-    # ke.print_pos()
-    # ke.print_keyword()
+    #pos keyword 출력
+    ke.print_pos()
+    ke.print_keyword()
 
     # file write
-    ke.write_pos()
-    ke.write_keyword()
 
 
+    # ke.write_pos()
+    # ke.write_keyword()
