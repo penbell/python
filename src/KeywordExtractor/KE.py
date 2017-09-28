@@ -26,21 +26,17 @@ class Keyword_Ext :
         self.key_iid = {}
         self.index = {}
 
-
     def run(self):
         self.check(self.sm.run(self.pos), 'sm.run')
         self.check(self.ka.run(self.pos,self.keyword), 'ka.run')
-        #self.check(self.sm.id_manager(self.keyword, self.key_id, self.key_iid), 'id_manager')
-        #self.check(self.sm.id_indexer(self.keyword, self.index), 'indexer')
+        self.check(self.sm.id_manager(self.keyword, self.key_id, self.key_iid), 'id_manager')
+        self.check(self.sm.id_indexer(self.keyword, self.index), 'indexer')
 
-
-    def check(self, ret, i) :
+    def check(self, ret, ex, i) :
         if ret is 1 :
-            print("{}함수 성공!".format(i))
-
-        else :
-            print("{}함수 실패!".format(i))
-
+            print("{} is success!".format(i))
+        elif ret is 0 :
+            print("{} is fail! :[{}]".format(i, ex))
 
     def print_pos(self):
         print(self.pos)
@@ -68,11 +64,9 @@ if __name__ == "__main__" :
     print("complete: [" + str(round(end, 2)) + "second ]")
 
     #pos keyword 출력
-    ke.print_pos()
-    ke.print_keyword()
+    #ke.print_pos()
+    #ke.print_keyword()
 
     # file write
-
-
-    # ke.write_pos()
-    # ke.write_keyword()
+    ke.write_pos()
+    ke.write_keyword()
