@@ -14,6 +14,7 @@ from konlpy.utils import pprint
 
 class SentenceManager() :
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     def run(self, pos) :                                #문장 처리 수행
 =======
@@ -21,35 +22,51 @@ class SentenceManager() :
 
     def run(self, pos) :
 >>>>>>> suhyun
+=======
+    _count = 0
+
+    def run(self, pos) :
+>>>>>>> 492542c074f374ccbd76ef3199ebedd3088e7bff
         path = "C:/Program Files/Java/jdk1.7.0_55/jre/bin/server/jvm.dll"
         slist = []
         try :
             self.scd_parser('DOC1.SCD', slist)    # scd에서 문장 추출, #id, date는 별도 저장
 <<<<<<< HEAD
+<<<<<<< HEAD
             self.pos_tagger(slist[0:10000], pos, path)    # 문장 형태소 분석하여 명사 추출
 =======
             self.pos_tagger(slist[0:10], pos, path)    # 문장 형태소 분석하여 명사 추출
 >>>>>>> suhyun
+=======
+            self.pos_tagger(slist[0:10], pos, path)    # 문장 형태소 분석하여 명사 추출
+>>>>>>> 492542c074f374ccbd76ef3199ebedd3088e7bff
             
             return 1
         except :
             return 0
             
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> suhyun
+=======
+>>>>>>> 492542c074f374ccbd76ef3199ebedd3088e7bff
     def scd_parser(self, scd, slist) :
         sentence = open(scd,'r')
         try:
             for i in sentence :
                 if i.startswith('<Contents>') :
 <<<<<<< HEAD
+<<<<<<< HEAD
                     slist.append(i[9:])
                     # slist.append(i.replace('<Contents>',''))
 =======
                     slist.append(i.replace('<Contents>',''))
 >>>>>>> suhyun
+=======
+                    slist.append(i.replace('<Contents>',''))
+>>>>>>> 492542c074f374ccbd76ef3199ebedd3088e7bff
             return 1
         except Exception as ex :
             print(ex)
@@ -58,8 +75,17 @@ class SentenceManager() :
     def pos_tagger(self, slist, pos, path) :
         twitter = Twitter(path)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 492542c074f374ccbd76ef3199ebedd3088e7bff
         try:
+            # slist의 기사가 1개인경우 type이 str임으로 별도처리
+            if type(slist) == str:
+                pos.append(twitter.nouns(slist))
+                return 1
+
+            print("len(slist) : ",len(slist))
             for one in slist :
 =======
         try:
@@ -80,6 +106,7 @@ class SentenceManager() :
             return 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     # def id_manager(self) :
     #     return
 
@@ -89,6 +116,13 @@ class SentenceManager() :
     def id_manager(self, keyword, id_m, iid_m) :
         for i in range(len(keyword)):
             for j in range(len(keyword[i])):
+=======
+
+    def id_manager(self, keyword, id_m, iid_m) :
+        for i in range(len(keyword)):
+            for j in range(len(keyword[i])):
+                # print(keyword[i][j][0])
+>>>>>>> 492542c074f374ccbd76ef3199ebedd3088e7bff
                 key = keyword[i][j][0]
                 if key in id_m:
                     continue
@@ -108,4 +142,7 @@ class SentenceManager() :
                     continue
                 
                 index[key] = [i]
+<<<<<<< HEAD
 >>>>>>> suhyun
+=======
+>>>>>>> 492542c074f374ccbd76ef3199ebedd3088e7bff
