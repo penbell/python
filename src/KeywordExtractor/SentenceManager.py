@@ -22,9 +22,9 @@ class SentenceManager() :
             self.scd_parser('DOC1.SCD', slist)    # scd에서 문장 추출, #id, date는 별도 저장
             self.pos_tagger(slist[0:10], pos, path)    # 문장 형태소 분석하여 명사 추출
             
-            return 1
+            return 1, "ok"
         except :
-            return 0
+            return 0, ex
             
     def scd_parser(self, scd, slist) :
         sentence = open(scd,'r')
@@ -32,10 +32,9 @@ class SentenceManager() :
             for i in sentence :
                 if i.startswith('<Contents>') :
                     slist.append(i.replace('<Contents>',''))
-            return 1
+            return 1, "ok"
         except Exception as ex :
-            print(ex)
-            return 0
+            return 0, ex
 
     def pos_tagger(self, slist, pos, path) :
         twitter = Twitter(path)
@@ -43,37 +42,43 @@ class SentenceManager() :
             # slist의 기사가 1개인경우 type이 str임으로 별도처리
             if type(slist) == str:
                 pos.append(twitter.nouns(slist))
-                return 1
+                return 1, "ok"
 
-            print("len(slist) : ",len(slist))
             for one in slist :
                 pos.append(twitter.nouns(one))
-            return 1
+            return 1, "ok"
         except Exception as ex :
-            print(ex)
-            return 0
+            return 0, ex
 
 
     def id_manager(self, keyword, id_m, iid_m) :
-        for i in range(len(keyword)):
-            for j in range(len(keyword[i])):
-                # print(keyword[i][j][0])
-                key = keyword[i][j][0]
-                if key in id_m:
-                    continue
-                
-                id_m[key] = self._count
-                iid_m[self._count] = key
+        try:
+            for i in range(len(keyword)):
+                for j in range(len(keyword[i])):
+                    # print(keyword[i][j][0])
+                    key = keyword[i][j][0]
+                    if key in id_m:
+                        continue
+                    
+                    id_m[key] = self._count
+                    iid_m[self._count] = key
 
-                self._count += 1
+                    self._count += 1
+            return 1, "ok"
+        except Exception as ex :
+            return 0, ex
 
     def indexer(self, keyword, index) :
-        for i in range(len(keyword)):
-            for j in range(len(keyword[i])):
-                key = keyword[i][j][0]
+        try:
+            for i in range(len(keyword)):
+                for j in range(len(keyword[i])):
+                    key = keyword[i][j][0]
 
-                if key in index:
-                    index[key] += [i]
-                    continue
-                
-                index[key] = [i]
+                    if key in index:
+                        index[key] += [i]
+                        continue
+                    
+                    index[key] = [i]
+            return 1, "ok"
+        except Exception as ex :
+            return 0, ex
