@@ -73,13 +73,13 @@ try:
     p.indexer(keyword, index)
     print(index)
 
-    while True :
-        inp3 = input('키워드를 입력하세요 >')
-        if inp3 not in index :
-            continue
-        else :
-            print(index[inp3])
-            break
+    # while True :
+    #     inp3 = input('키워드를 입력하세요 >')
+    #     if inp3 not in index :
+    #         continue
+    #     else :
+    #         print(index[inp3])
+    #         break
 except Exception as ex:
     print(ex)
 

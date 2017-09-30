@@ -20,11 +20,10 @@ class SentenceManager() :
         slist = []
         try :
             self.scd_parser('DOC1.SCD', slist)    # scd에서 문장 추출, #id, date는 별도 저장
-            self.pos_tagger(slist[0:100], pos, path)    # 문장 형태소 분석하여 명사 추출
+            self.pos_tagger(slist[0:10], pos, path)    # 문장 형태소 분석하여 명사 추출
             
             return 1, "ok"
         except Exception as ex :
-            ex += 'SentenceManager-run'
             return 0, ex
             
     def scd_parser(self, scd, slist) :
@@ -35,7 +34,6 @@ class SentenceManager() :
                     slist.append(i.replace('<Contents>',''))
             return 1, "ok"
         except Exception as ex :
-            ex += 'SentenceManager-scd_parser'
             return 0, ex
 
     def pos_tagger(self, slist, pos, path) :
@@ -50,20 +48,14 @@ class SentenceManager() :
                 pos.append(twitter.nouns(one))
             return 1, "ok"
         except Exception as ex :
-            ex += 'SentenceManager-pos_tagger'
             return 0, ex
 
 
     def id_manager(self, keyword, id_m, iid_m) :
-        ''' 
-            keyword 에서 key value 에 따른 
-            딕셔너리 생성 
-        '''
         try:
-            for i in range(len(keyword)):
-                for j in range(len(keyword[i])):
-                    # print(keyword[i][j][0])
-                    key = keyword[i][j][0]
+            for i, l in enumerate(keyword):
+                for j in l:
+                    key = j[0]
                     if key in id_m:
                         continue
                     
@@ -73,17 +65,13 @@ class SentenceManager() :
                     self._count += 1
             return 1, "ok"
         except Exception as ex :
-            ex += 'SentenceManager-id_manager'
             return 0, ex
 
     def indexer(self, keyword, index) :
-        '''
-            key 가 있는 위치를 저장하는 위치 설정
-        '''
         try:
-            for i in range(len(keyword)):
-                for j in range(len(keyword[i])):
-                    key = keyword[i][j][0]
+            for i, l in enumerate(keyword) :
+                for j in l :
+                    key = j[0]
 
                     if key in index:
                         index[key] += [i]
@@ -92,5 +80,4 @@ class SentenceManager() :
                     index[key] = [i]
             return 1, "ok"
         except Exception as ex :
-            ex += 'SentenceManager-indexer'
             return 0, ex
