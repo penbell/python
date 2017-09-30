@@ -24,6 +24,7 @@ class SentenceManager() :
             
             return 1, "ok"
         except Exception as ex :
+            ex += 'SentenceManager-run'
             return 0, ex
             
     def scd_parser(self, scd, slist) :
@@ -34,6 +35,7 @@ class SentenceManager() :
                     slist.append(i.replace('<Contents>',''))
             return 1, "ok"
         except Exception as ex :
+            ex += 'SentenceManager-scd_parser'
             return 0, ex
 
     def pos_tagger(self, slist, pos, path) :
@@ -48,10 +50,15 @@ class SentenceManager() :
                 pos.append(twitter.nouns(one))
             return 1, "ok"
         except Exception as ex :
+            ex += 'SentenceManager-pos_tagger'
             return 0, ex
 
 
     def id_manager(self, keyword, id_m, iid_m) :
+        ''' 
+            keyword 에서 key value 에 따른 
+            딕셔너리 생성 
+        '''
         try:
             for i in range(len(keyword)):
                 for j in range(len(keyword[i])):
@@ -66,9 +73,13 @@ class SentenceManager() :
                     self._count += 1
             return 1, "ok"
         except Exception as ex :
+            ex += 'SentenceManager-id_manager'
             return 0, ex
 
     def indexer(self, keyword, index) :
+        '''
+            key 가 있는 위치를 저장하는 위치 설정
+        '''
         try:
             for i in range(len(keyword)):
                 for j in range(len(keyword[i])):
@@ -81,4 +92,5 @@ class SentenceManager() :
                     index[key] = [i]
             return 1, "ok"
         except Exception as ex :
+            ex += 'SentenceManager-indexer'
             return 0, ex
